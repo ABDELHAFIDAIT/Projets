@@ -138,7 +138,7 @@ int main()
                     compteur++;
                 }else if(choix==2){
                     do{
-                        printf("\nEntrer le nombre de Livres a Ajouter : ");
+                        printf("\nEntrer le nombre des Etudiants a Ajouter : ");
                         scanf("%d", &nbrEtudiant);
                     }while(nbrEtudiant<0 || nbrEtudiant>(100-compteur));
                     for(int i=0; i<nbrEtudiant; i++){
@@ -231,7 +231,6 @@ int main()
                     printf("  3 - Modifier la Date de Naissance .\n");
                     printf("  4 - Modifier le Departement .\n");
                     printf("  5 - Modifier la Note Generale.\n");
-                    printf("  6 - Modifier Tous Les Champs .\n");
                     printf("\n  0 - Retour au Menu Principale .\n");
                     printf("--------------------------------------------\n\n");
 
@@ -343,46 +342,6 @@ int main()
                                 }
                                 else{
                                     modifierNote(etudiant , newNote , test);
-                                    Affichage(etudiant , test , test+1);
-                                }
-                            }
-                            printf("\n\n");
-                            break;
-                    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                        case 6 :
-                            test = RechercheParNumero(etudiant , compteur);
-                            if(test==-1)
-                                printf("\nLe Numero recherche ne correspond a aucun Etudiant de la Liste !\n\n");
-                            else{
-                                printf("\nEntrer le Nouveau Nom : ");
-                                scanf("%s", newNom);
-                                printf("\nEntrer le Nouveau Prenom : ");
-                                scanf("%s", newPrenom);
-                                printf("\nEntrer le Nouvelle Date de Naissance (Ex: jour/mois/Annee) : ");
-                                scanf("%s", newDateNaissance);
-                                printf("- Departement : \n");
-                                printf("\t1- Informatique.\n\t2- RH.\n\t3- Electrique.\n\t4- Finance.\n");
-                                do{
-                                    printf("Entrer le Numero qui correspond au Nouveau Departement : ");
-                                    scanf("%d", &newDepartement);
-                                }while(newDepartement<1 || newDepartement>4);
-                                do{
-                                    printf("\nEntrer la Nouvelle Note Generale : ");
-                                    scanf("%f", &newNote);
-                                }while(newNote<0 || newNote>20);
-
-                                confirm = Confirmation();
-                                if(confirm=='N'){
-                                    printf("\nOperation Annule !\n");
-                                    break;
-                                }
-                                else{
-                                    modifierNom(etudiant , newNom , test);
-                                    modifierPrenom(etudiant , newPrenom , test);
-                                    modifierDateNaissance(etudiant , newDateNaissance , test);
-                                    modifierDepartement(etudiant , newDepartement , test);
-                                    modifierNote(etudiant , newNote , test);
-
                                     Affichage(etudiant , test , test+1);
                                 }
                             }
@@ -645,7 +604,7 @@ int RechercheParDepart(Etudiant E[] , int compteur){
     do{
         printf("Entrer le Departement a Chercher : ");
         scanf("%d", &depart);
-    }while(depart!=1 && depart!=2 && depart!=3 && depart!=4);
+    }while(depart<1 && depart>4);
 
     for(int i=0 ; i<compteur ; i++){
         if(E[i].departement == depart){
@@ -857,7 +816,7 @@ float moyenneGeneraleDepart(Etudiant E[] , int compteur , int Departement){
         }
     }
     if(count==0){
-        printf("Le Departement ne Contient aucun Etudiant !");
+        //printf("Le Departement ne Contient aucun Etudiant !");
         moyenne = 0 ;
     }else
         moyenne = somme/count;
@@ -873,7 +832,7 @@ float moyenneGeneraleUniversite(Etudiant E[] , int compteur){
             somme += E[i].note;
     }
     if(compteur==0){
-        printf("L'Universite ne Contient aucun Etudiant !");
+        //printf("L'Universite ne Contient aucun Etudiant !");
         moyenne = 0 ;
     }else
         moyenne = somme/compteur;
