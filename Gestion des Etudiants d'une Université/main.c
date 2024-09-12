@@ -59,15 +59,15 @@ int main()
 {
     Etudiant etudiant[100] = {
         {1, "Ali", "Ali", "12/03/2001", 1, 15},
-        {2, "Badr", "Badr", "25/07/2000", 1, 14},
-        {3, "Maryam", "Maryam", "01/01/1999", 2, 6},
-        {4, "Omar", "Omar", "05/09/2002", 3, 13},
-        {5, "Laila", "Laila", "18/06/2001", 4, 7},
-        {6, "Mourad", "Mourad", "01/11/2001", 4, 7},
-        {7, "Houssam", "Houssam", "16/10/2000", 4, 7},
-        {8, "Sara", "Sara", "04/02/2002", 4, 7},
-        {9, "Achraf", "Achraf", "23/06/2001", 4, 7},
-        {10, "Imane", "Imane", "10/03/1999", 4, 7}
+        {2, "Badr", "Badr", "25/07/2000", 2, 14},
+        {3, "Maryam", "Maryam", "01/01/1999", 3, 6},
+        {4, "Omar", "Omar", "05/09/2002", 4, 18},
+        {5, "Laila", "Laila", "18/06/2001", 1, 11},
+        {6, "Mourad", "Mourad", "01/11/2001", 2, 14},
+        {7, "Houssam", "Houssam", "16/10/2000", 3, 16},
+        {8, "Sara", "Sara", "04/02/2002", 4, 9},
+        {9, "Achraf", "Achraf", "23/06/2001", 1, 15},
+        {10, "Imane", "Imane", "10/03/1999", 3, 11}
     };
 
     int menu = -1 ;//variable pour naviguer dans le menu principale
@@ -137,8 +137,10 @@ int main()
                     ajouterEtudiant(etudiant , compteur);
                     compteur++;
                 }else if(choix==2){
-                    printf("\nEntrer le nombre de Livres a Ajouter : ");
-                    scanf("%d", &nbrEtudiant);
+                    do{
+                        printf("\nEntrer le nombre de Livres a Ajouter : ");
+                        scanf("%d", &nbrEtudiant);
+                    }while(nbrEtudiant<0 || nbrEtudiant>(100-compteur));
                     for(int i=0; i<nbrEtudiant; i++){
                         printf("\nEtudiant %d : ------------------", i+1);
                         ajouterEtudiant(etudiant , compteur);
