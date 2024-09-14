@@ -3,13 +3,6 @@
 #include <string.h>
 
 
-typedef struct{
-    int jour ;
-    int mois ;
-    int annee ;
-}Date;
-
-
 typedef struct {
     int numero ;
     char nom[100];
@@ -22,7 +15,7 @@ typedef struct {
 
 void ajouterEtudiant(Etudiant E[] , int compteur);
 
-void Affichage(Etudiant E[] , int debut ,int compteur);
+void afficher(Etudiant E[] , int debut , int compteur);
 
 int RechercheParNom(Etudiant E[] , int compteur);
 int RechercheParDepart(Etudiant E[] , int compteur);
@@ -51,8 +44,6 @@ void TriNumero(Etudiant E[] , int compteur);
 int nbrEtudiantParDepart(Etudiant E[], int compteur , int Departement);
 int nbrEtudiantReussiParDepart(Etudiant E[] , int compteur , int Departement);
 int superieurSeuil(Etudiant E[] , int compteur , float Seuil);
-
-
 
 
 int main()
@@ -114,13 +105,13 @@ int main()
 
         printf("\nChoisir l'operation a Effectuer : ");
         scanf("%d", &menu);
-
+        printf("\n\n");
         switch(menu){
             case 0 :
                 break;
             case 1 :
                 printf("\n\n---------------------------------------\n");
-                printf("         MENU D'AJOUT                  \n");
+                printf("            MENU D'AJOUT                  \n");
                 printf("---------------------------------------\n");
                 printf("  1 - Ajouter un seul Etudiant.\n");
                 printf("  2 - Ajouter plusieurs Etudiants.\n");
@@ -133,7 +124,7 @@ int main()
                 }while(choix<0 || choix>2);
 
                 if(choix==1){
-                    printf("\nVeuillez Remplir les Infos de l'Etudiant : ");
+                    printf("\nVeuillez Remplir les Infos de l'Etudiant : \n");
                     ajouterEtudiant(etudiant , compteur);
                     compteur++;
                 }else if(choix==2){
@@ -154,9 +145,7 @@ int main()
                 break;
     //======================================================================================================================
             case 2 :
-                printf("\n\nAFFICHAGE \n");
-                TriNumero(etudiant , compteur);
-                Affichage(etudiant , 0 , compteur);
+                afficher(etudiant , 0 , compteur);
                 printf("\n\n");
                 break;
     //======================================================================================================================
@@ -209,7 +198,7 @@ int main()
                     if(test==-1)
                         printf("\nLe Nom recherche ne correspond a aucun Etudiant de la Liste !\n\n");
                     else
-                        Affichage(etudiant , test , test+1);
+                        afficher(etudiant , test , test+1);
                 }else if(choix==2){
                     test = RechercheParDepart(etudiant , compteur);
                     if(test==0)
@@ -256,7 +245,7 @@ int main()
                                 }
                                 else{
                                     modifierNom(etudiant , newNom , test);
-                                    Affichage(etudiant , test , test+1);
+                                    afficher(etudiant , test , test+1);
                                 }
                             }
                             printf("\n\n");
@@ -276,7 +265,7 @@ int main()
                                 }
                                 else{
                                     modifierPrenom(etudiant , newPrenom , test);
-                                    Affichage(etudiant , test , test+1);
+                                    afficher(etudiant , test , test+1);
                                 }
                             }
                             printf("\n\n");
@@ -296,7 +285,7 @@ int main()
                                 }
                                 else{
                                     modifierDateNaissance(etudiant , newDateNaissance , test);
-                                    Affichage(etudiant , test , test+1);
+                                    afficher(etudiant , test , test+1);
                                 }
                             }
                             printf("\n\n");
@@ -320,7 +309,7 @@ int main()
                                 }
                                 else{
                                     modifierDepartement(etudiant , newDepartement , test);
-                                    Affichage(etudiant , test , test+1);
+                                    afficher(etudiant , test , test+1);
                                 }
                             }
                             printf("\n\n");
@@ -342,7 +331,7 @@ int main()
                                 }
                                 else{
                                     modifierNote(etudiant , newNote , test);
-                                    Affichage(etudiant , test , test+1);
+                                    afficher(etudiant , test , test+1);
                                 }
                             }
                             printf("\n\n");
@@ -374,8 +363,8 @@ int main()
     //========================================================================================================================
             case 7 :
                 Modify :
-                printf("\n\n---------------------------------------\n");
-                printf("          MENU DE MODIFICATION                  \n");
+                printf("\n\n-------------------------------------------\n");
+                printf("              MENU DE TRI                \n");
                 printf("--------------------------------------------\n");
                 printf("  1 - Tri par Nom .\n");
                 printf("  2 - Tri par Note Generale .\n");
@@ -399,12 +388,11 @@ int main()
 
                             if(tri==1){
                                 Tri_Croissant(etudiant , compteur , choix);
-                                //Tri_Croissant_Nom(etudiant , compteur );
-                                Affichage(etudiant , 0 , compteur);
+                                afficher(etudiant , 0 , compteur);
                             }else if(tri==2){
                                 Tri_Decroissant(etudiant , compteur , choix);
-                                //Tri_Decroissant_Nom(etudiant , compteur);
-                                Affichage(etudiant , 0 , compteur);
+                                printf("\nTri Deroissant par Note Effectue avec Succes !\n\n");
+                                afficher(etudiant , 0 , compteur);
                             }else
                                 goto Modify;
 
@@ -419,10 +407,11 @@ int main()
 
                             if(tri==1){
                                 Tri_Croissant(etudiant , compteur , choix);
-                                Affichage(etudiant , 0 , compteur);
+                                afficher(etudiant , 0 , compteur);
                             }else if(tri==2){
                                 Tri_Decroissant(etudiant , compteur , choix);
-                                Affichage(etudiant , 0 , compteur);
+                                printf("\nTri Deroissant par Note Effectue avec Succes !\n\n");
+                                afficher(etudiant , 0 , compteur);
                             }else
                                 goto Modify;
                             break ;
@@ -487,7 +476,7 @@ int main()
                 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     case 4 :
                         Tri_Decroissant(etudiant , compteur , 2);
-                        Affichage(etudiant , 0 , 3);
+                        afficher(etudiant , 0 , 3);
                         break;
                 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     case 5 :
@@ -556,28 +545,6 @@ void ajouterEtudiant(Etudiant E[] , int compteur){
 }
 
 
-//FONCTION D'AFFICHAGE DES ETUDIANT ========================================================
-void Affichage(Etudiant E[] , int debut ,int compteur){
-    for(int i=debut ; i<compteur ; i++){
-        printf("\nEtudiant %d : -------------------------\n", i+1);
-        printf("- Numero : %d .\n", E[i].numero);
-        printf("- Nom : %s .\n", E[i].nom);
-        printf("- Prenom : %s .\n", E[i].prenom);
-        printf("- Date de Naissance : %s .\n", E[i].dateNaissance);
-        if(E[i].departement==1)
-            printf("- Departement : Informatique .\n");
-        else if(E[i].departement==2)
-            printf("- Departement : RH .\n");
-        else if(E[i].departement==3)
-            printf("- Departement : Electrique .\n");
-        else
-            printf("- Departement : Finance .\n");
-
-        printf("- Note Generale : %.2f .\n", E[i].note);
-    }
-}
-
-
 //FONCTION DE RECHERCHE PAR NOM DE L'ETUDIANT ========================================================
 int RechercheParNom(Etudiant E[] , int compteur){
     int exist ;
@@ -585,7 +552,7 @@ int RechercheParNom(Etudiant E[] , int compteur){
     printf("\nEntrer le Nom de l'Etudiant a Chercher : ");
     scanf("%s", nom);
     for(int i=0 ; i<compteur ; i++){
-        if(strcmp(nom , E[i].nom)==0){
+        if(strcasecmp(nom , E[i].nom)==0){
             exist = i ;
             break ;
         }else
@@ -608,7 +575,7 @@ int RechercheParDepart(Etudiant E[] , int compteur){
 
     for(int i=0 ; i<compteur ; i++){
         if(E[i].departement == depart){
-            Affichage(E , i , i+1);
+            afficher(E , i , i+1);
             exist=1;
         }
     }
@@ -699,7 +666,7 @@ void Tri_Croissant(Etudiant E[] , int compteur , int choix){
     if(choix==1){
         for(int i=0; i<compteur-1 ; i++){
             for(int j=0; j<compteur-1-i ; j++){
-                if(strcmp(E[j].nom , E[j+1].nom)>0){
+                if(strcasecmp(E[j].nom , E[j+1].nom)>0){
                     temp = E[j];
                     E[j] = E[j+1] ;
                     E[j+1] = temp ;
@@ -729,7 +696,7 @@ void Tri_Decroissant(Etudiant E[] , int compteur , int choix){
     if(choix==1){
         for(int i=0; i<compteur-1 ; i++){
             for(int j=0; j<compteur-1-i ; j++){
-                if(strcmp(E[j].nom , E[j+1].nom)<0){
+                if(strcasecmp(E[j].nom , E[j+1].nom)<0){
                     temp = E[j];
                     E[j] = E[j+1] ;
                     E[j+1] = temp ;
@@ -747,7 +714,6 @@ void Tri_Decroissant(Etudiant E[] , int compteur , int choix){
                 }
             }
         }
-        printf("\nTri Deroissant par Note Effectue avec Succes !\n\n");
     }
 }
 
@@ -757,13 +723,13 @@ void Tri_Statut(Etudiant E[], int compteur){
     printf("\nLes Etudiants Reussis sont : \n");
     for(int i=0 ; i<compteur; i++){
         if(E[i].note>=10){
-            Affichage(E , i , i+1);
+            afficher(E , i , i+1);
         }
     }
     printf("\n\nLes Etudiants Non Reussis sont : \n");
     for(int i=0 ; i<compteur; i++){
         if(E[i].note < 10){
-            Affichage(E , i , i+1);
+            afficher(E , i , i+1);
         }
     }
 }
@@ -796,7 +762,7 @@ int superieurSeuil(Etudiant E[] , int compteur , float Seuil){
     int count = 0 ;
     for(int i=0 ; i<compteur ; i++){
         if(E[i].note>Seuil){
-            Affichage(E , i , i+1);
+            afficher(E , i , i+1);
             count++;
         }
     }
@@ -851,5 +817,31 @@ void TriNumero(Etudiant E[] , int compteur){
                 E[j+1] = temp ;
             }
         }
+    }
+}
+
+
+//FONCTION D'AFFICHAGE DES ETUDIANT ========================================================
+void afficher(Etudiant E[] , int debut , int compteur){
+    for (int i = debut; i < compteur; i++) {
+        printf("-----------------------+---------------------------\n");
+        printf("                   ETUDIANT  %d                    \n", i+1);
+        printf("-----------------------+---------------------------\n");
+        printf("   Numero              |  %d                          \n", E[i].numero);
+        printf("   Nom                 |  %s                          \n", E[i].nom);
+        printf("   Prenom              |  %s                          \n", E[i].prenom);
+        printf("   Date de Naissance   |  %s                          \n", E[i].dateNaissance);
+        if(E[i].departement==1)
+            printf("   Departement         |  Informatique \n");
+        else if(E[i].departement==2)
+            printf("   Departement         |  RH \n");
+        else if(E[i].departement==3)
+            printf("   Departement         |  Electrique \n");
+        else
+            printf("   Departement         |  Finance \n");
+        printf("   Note Generale       |  %.2f                    \n", E[i].note);
+        printf("-----------------------+---------------------------\n");
+
+        printf("\n\n\n");
     }
 }
